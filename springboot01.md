@@ -1,14 +1,14 @@
 
-1、打开Eclipse新建一个maven项目,选择默认存储位置->选择最后一项maven-archetype-webapp,填写自定义Artifact Id。
-  有三个重要的文件，应用程序代码位于src/main/java，资源在src/main/resources目录里，测试代码在src/test/java里
-  如果我们缺少src/main/java 和src/test/java 文件 右键项目->properties->Java Build Path ->Source->add folder  
-  如果添加报错那就把 excluded 中的东西全都移除再试一下add folder
-
-2、修改pom.xml文件
-  （1）引入起步依赖spring-boot-starter-web
-     （i）什么是起步依赖，起步依赖有什么用？
-        起步依赖的核心就是对pom文件的配置优化，Spring Boot版本升级的过程也是一个pom配置不断优化的过程，通俗来讲就是把一套工具组装在一起构造了一个简单的模板，你可以添加新的配置也可以更换配置，极大减少了开发过程中一些问题。
-        举个例子来说，如果不用Spring Boot，你会向项目里添加哪些依赖呢？要用spring mvc的话你需要哪些Spring依赖呢?你还记得Thymeleaf的Group和Artifact ID吗？你应该用哪个版本的Spring Data JPA呢？他们放在一起兼容吗？
+1、打开Eclipse新建一个maven项目,选择默认存储位置->选择最后一项maven-archetype-webapp,填写自定义Artifact Id。  
+  有三个重要的文件，应用程序代码位于src/main/java，资源在src/main/resources目录里，测试代码在src/test/java里  
+  如果我们缺少src/main/java 和src/test/java 文件 右键项目->properties->Java Build Path ->Source->add folder    
+  如果添加报错那就把 excluded 中的东西全都移除再试一下add folder  
+  
+2、修改pom.xml文件  
+  （1）引入起步依赖spring-boot-starter-web  
+     （i）什么是起步依赖，起步依赖有什么用？  
+        起步依赖的核心就是对pom文件的配置优化，Spring Boot版本升级的过程也是一个pom配置不断优化的过程，通俗来讲就是把一套工具组装在一起构造了一个简单的模板，你可以添加新的配置也可以更换配置，极大减少了开发过程中一些问题。  
+        举个例子来说，如果不用Spring Boot，你会向项目里添加哪些依赖呢？要用spring mvc的话你需要哪些Spring依赖呢?你还记得Thymeleaf的Group和Artifact ID吗？你应该用哪个版本的Spring Data JPA呢？他们放在一起兼容吗？  
         Spring Boot通过众多起步依赖降低了项目依赖的复杂度，本质上是一个maven项目对象模型POM，定义了对其他库的传递依赖，这些东西加起来支持某项功能，举例来说你想实现一个web应用程序，与其向项目文件中添加一堆单独的库依赖，不如声明这是一个Web应用程序，添加spring-boot-starter-web。那我们具体来看看spring-boot-starter-web到底传递了什么依赖，双击打来spring-boot-starter-web的pom.xml，我们发现他的provides: spring-webmvc,spring-web,jackson-databind，比起手动添加单独的库，这样快速又不怕不兼容的依赖的添加方法谁不爱呢？
         一般以spring-boot-starter-* 作为命名前缀，如果想以Thymeleaf为Web视图，JPA来实现数据持久化，那么我们可以直接添加spring-boot-starter-thymeleaf和spring-boot-starter-jpa,为了方便测试，我们还需要Spring Boot上下文运行集成测试的库，因此需要添加spring-boot-starter-test起步依赖，上面所说的四个起步依赖就等价于一大把独立的库，这些传递依赖涵盖了Spring MVC，Spring Data JPA，Thymeleaf等内容。
      （ii）遇到不需要的依赖如何剔除掉给项目瘦身呢？
