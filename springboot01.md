@@ -42,7 +42,7 @@
         </parent>
 
 
-```python
+```
 //pom.xml里添加的依赖，我们就简单写一个网页，不需要太多起步依赖
 <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -103,7 +103,7 @@
    （1）我们需要一个启动类（项目入口）这个类必须包含main函数，执行SpringApplication.run(启动类.class)静态方法，有三种写法
 
 
-```python
+```
     （i）在src/main/java里新建一个包com.tust.fir,在包里新建类firstblood
          package com.tust.fir;
          import org.springframework.boot.SpringApplication;
@@ -126,7 +126,7 @@
 ```
 
 
-```python
+```
     （ii）(a)在src/main/java里新建一个包com.tust.fir,在包里新建类firstblood
           import org.springframework.boot.SpringApplication;
           import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -158,7 +158,7 @@
 ```
 
 
-```python
+```
   (iii)   (a)在src/main/java里新建一个包com.tust.fir,在包里新建类firstblood
          package com.tust.fir;
          import org.springframework.boot.SpringApplication;
@@ -189,7 +189,7 @@
 ```
 
 
-```python
+```
 4、常见异常处理
    （i）找不到或无法加载主类
     project->clean  刷新重新run   
