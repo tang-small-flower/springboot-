@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mybatis.usermapper">
+      <resultMap id="re1" type="com.mybatis.user" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="username" property="userName" jdbcType="VARCHAR" />  
+        <result column="password" property="passWord" jdbcType="VARCHAR" />
+        <association property="idcard" column="cardid" javaType="com.mybatis.id_card" select="com.mybatis.id_cardmapper.getbyid" />
+    </resultMap>
+    
+    <!--查询所有法二需要id_cardmapper-->
+    <select id="getAll" resultMap="re1"> select * from user </select>
+    <!-- 法一
+      <resultMap id="re1" type="com.mybatis.user" >             //type：实体类
+        <id column="id" property="id" jdbcType="BIGINT" />      //id ：主键 property：实体类属性名 column：表中对应的名字
+        <result column="username" property="userName" jdbcType="VARCHAR" />  
+        <result column="password" property="passWord" jdbcType="VARCHAR" />
+        <association property="idcard" javaType="com.mybatis.id_card">   //property：实体类中javaType类的成员名字   javaType：对应实体类
+          <id property="id" column="id"></id>       //property：javaType类中 属性名，column：相对应表中的列名 
+          <result property="code" column="code" jdbcType="VARCHAR"></result>
+        </association>
+    </resultMap>
+    <select id="getAll" resultMap="re1"> select user.*,idcard.code from user left join idcard on user.cardid=idcard.id </select>
+     -->
+
+    <!--保存用户-->
+   <insert id="saveUser" useGeneratedKeys="true" keyProperty="id"> insert into user(username,password)  values(#{userName},#{passWord}) </insert>
+
+    <!--通过Id删除用户-->
+    <delete id="deleteUserById"> delete from user where id =#{id} </delete>
+
+    <!--更新该用户信息-->
+    <update id="updateUser"> update user set username = #{userName},password =  #{passWord}
+       where id = #{id} </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

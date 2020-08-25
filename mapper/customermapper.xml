@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 法一执行一个sql  
+<mapper namespace="com.mybatis.customermapper">
+    <resultMap type="com.mybatis.customer" id="re1">
+      <id property="id" column="id" />
+      <result property="name" column="name"/>
+      <collection property="list" ofType="com.mybatis.order">
+         <id property="id" column="uid"></id>
+         <result property="name" column="uname"/>
+      </collection>
+    </resultMap>
+    <select id="getAll" resultMap="re1"> select customer.*,ord.id as uid,ord.name as uname from customer left join ord on ord.cid=customer.id </select>
+</mapper>
+ -->
+ <!-- 法二执行两个sql 需要ordermapper -->
+ <mapper namespace="com.mybatis.customermapper">
+    <resultMap type="com.mybatis.customer" id="re1">
+      <id property="id" column="id" />
+      <result property="name" column="name"/>
+      <collection property="list" column="id" ofType="com.mybatis.order" select="com.mybatis.ordermapper.findbyid" />
+    </resultMap>
+    <select id="getAll" resultMap="re1"> select * from customer</select>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mybatis.teachermapper">
+    <resultMap type="com.mybatis.teacher" id="re1">
+      <id property="id" column="id"/>
+      <result property="name" column="name"/>
+    </resultMap>
+     <resultMap type="com.mybatis.teacher" id="re2" extends="re1">
+      <collection property="list" resultMap="com.mybatis.studentmapper.re1">
+      </collection>
+    </resultMap>
+    <select id="findall" resultMap="re2"> select t.id,t.name,s.id as uid,s.name as uname from tea t join stu_tea on t.id=stu_tea.tid join stu s on stu_tea.sid=s.id </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
